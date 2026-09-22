@@ -1,0 +1,19 @@
+{
+  "name": "local-pressable-connect",
+  "productName": "Pressable Connect",
+  "version": "0.1.10",
+  "author": "Kelp Agency",
+  "keywords": ["local-addon", "pressable", "wordpress", "deployment"],
+  "bgColor": "#5b2d90",
+  "icon": "icon.svg",
+  "description": "Push and pull Local WordPress sites to and from Pressable.",
+  "renderer": "lib/renderer.js",
+  "main": "lib/main.js",
+  "files": ["lib", "icon.svg", "README.md"],
+  "license": "MIT",
+  "scripts": {"check": "node --check lib/main.js && node --check lib/renderer.js && node --check lib/PressableConnect.js"},
+  "peerDependencies": {"react": ">=16.4.0", "react-dom": ">=16.4.0"},
+  "dependencies": {"fs-extra": "^11.3.2", "react": "^16.14.0", "react-dom": "^16.14.0", "ssh2": "^1.17.0", "ssh2-sftp-client": "^12.0.1"},
+  "bundledDependencies": ["fs-extra", "ssh2", "ssh2-sftp-client"],
+  "engines": {"local-by-flywheel": ">=10.0.0"}
+}

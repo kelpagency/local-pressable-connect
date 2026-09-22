@@ -1,0 +1,17 @@
+# Installed dependencies and local build artifacts
+node_modules/
+*.tgz
+coverage/
+
+# Logs and local configuration
+*.log
+.env
+.env.*
+!.env.example
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
