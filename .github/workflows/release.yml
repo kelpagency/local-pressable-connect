@@ -5,30 +5,41 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing version tag to package (for example v0.1.11)
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release-${{ inputs.release_tag || github.ref_name }}
   cancel-in-progress: false
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+        with:
+          ref: refs/tags/${{ env.RELEASE_TAG }}
+      - uses: actions/setup-node@v5
         with:
           node-version: '22'
           cache: npm
       - name: Validate release tag
-        env:
-          RELEASE_TAG: ${{ github.ref_name }}
-          REF_TYPE: ${{ github.ref_type }}
         run: |
-          node -e 'const version = require("./package.json").version; if (process.env.REF_TYPE !== "tag" || process.env.RELEASE_TAG !== `v${version}`) { console.error("Run this workflow on a version tag matching package.json."); process.exit(1); }'
-      - run: npm ci --ignore-scripts
+          node -e 'const version = require("./package.json").version; if (process.env.RELEASE_TAG !== `v${version}`) { console.error("Choose a version tag matching package.json."); process.exit(1); }'
+      # The legacy Local ESLint preset declares an ESLint 5 peer dependency.
+      # Preserve the existing lockfile while installing the project's ESLint 8 tools.
+      - name: Repair historical release lockfile
+        if: github.event_name == 'workflow_dispatch'
+        run: npm install --package-lock-only --ignore-scripts --legacy-peer-deps
+      - run: npm ci --ignore-scripts --legacy-peer-deps
       - run: npm run typecheck
       - run: npm run build
       - run: npm run check
@@ -41,10 +52,9 @@ jobs:
       - name: Publish release assets
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ github.ref_name }}
         run: |
           if gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
             gh release upload "$RELEASE_TAG" release-assets/* --clobber
           else
-            gh release create "$RELEASE_TAG" release-assets/* --verify-tag --title "Pressable Connect for Local ${RELEASE_TAG#v}" --notes-file docs/launch/release-notes.txt
+            gh release create "$RELEASE_TAG" release-assets/* --verify-tag --title "Pressable Connect for LocalWP ${RELEASE_TAG#v}" --notes-file docs/launch/release-notes.txt
           fi
