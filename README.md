@@ -38,7 +38,7 @@ The add-on is configured in a site's Tools panel. Its Installed Add-ons card has
 Edit the TypeScript and JSX source files in `src/`. The TypeScript compiler generates the runnable JavaScript and source maps in `lib/`. Run:
 
 ```bash
-npm ci
+npm ci --legacy-peer-deps
 npm run typecheck
 npm run build
 npm run check
