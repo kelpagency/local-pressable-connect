@@ -6,6 +6,17 @@ This is independent software and is not affiliated with Pressable, WP Engine, or
 
 [Download the latest release](https://github.com/kelpagency/local-pressable-connect/releases/latest) · [Report an issue](https://github.com/kelpagency/local-pressable-connect/issues)
 
+<img
+  loading="eager"
+  src="docs/images/pressable-connect-localwp.png"
+  srcset="docs/images/pressable-connect-localwp.png 2818w"
+  sizes="(max-width: 767px) 100vw, 896px"
+  width="2818"
+  height="1968"
+  alt="Pressable Connect in LocalWP showing the saved Pressable site connection, files and database options, and push and pull buttons.">
+
+Map your LocalWP site to a Pressable site, save its SSH/SFTP connection, and choose files, database, or both before pushing or pulling.
+
 ## Requirements
 
 - LocalWP 10 or newer
