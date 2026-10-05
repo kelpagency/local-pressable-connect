@@ -26,10 +26,12 @@ The add-on is configured in a site's Tools panel. Its Installed Add-ons card has
 
 ## Develop and package
 
-This repository currently contains the runnable, readable JavaScript in `lib/`. The TypeScript and JSX source files referenced by the existing source maps are not present, so there is no compile step. Edit the non-minified JavaScript in `lib/` and run:
+Edit the TypeScript and JSX source files in `src/`. The TypeScript compiler generates the runnable JavaScript and source maps in `lib/`. Run:
 
 ```bash
-npm install
+npm ci
+npm run typecheck
+npm run build
 npm run check
 ```
 
@@ -40,7 +42,13 @@ mkdir -p "$HOME/Library/Application Support/Local/addons"
 ln -s "$PWD" "$HOME/Library/Application Support/Local/addons/local-pressable-connect"
 ```
 
-Enable the add-on in Local and restart Local. To make an installable archive, run `npm pack` after installing dependencies. The archive is named from the package name and version in `package.json`. Do not commit `node_modules/` or `.tgz` archives; the package bundles its required runtime dependencies when packed.
+Enable the add-on in Local and restart Local. Use `npm run watch` to rebuild source changes during development. To make an installable archive, run `npm pack` after installing dependencies; its prepare step builds the source. The archive is named from the package name and version in `package.json`. Do not commit `node_modules/` or `.tgz` archives; the package bundles its required runtime dependencies when packed.
+
+## Changes in 0.1.11
+
+- SSH/SFTP authentication failures explain which credentials to use, and IPC errors omit the internal wrapper.
+- Switching the Pressable site or SSH/SFTP user clears the previous password.
+- The Pressable site picker keeps alphabetical sorting.
 
 ## Transfer behavior
 
