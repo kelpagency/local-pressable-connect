@@ -1,19 +1,19 @@
-Pressable Connect for Local 0.1.11
+Pressable Connect for LocalWP 0.1.11
 
-A free, MIT-licensed Local 10 add-on for pushing and pulling WordPress sites between Local and Pressable.
+A free, MIT-licensed add-on for [Local (LocalWP)](https://localwp.com/) 10+ for pushing and pulling WordPress sites between LocalWP and [Pressable](https://pressable.com/).
 
-Download local-pressable-connect-0.1.11.tgz under Assets. In Local, choose Add-ons → Installed → Install from disk, select the .tgz without extracting it, enable the add-on, and restart Local if prompted. Open your site’s Tools → Pressable Connect. The source ZIP/TAR downloads are for developers and are not installable add-ons.
+Download local-pressable-connect-0.1.11.tgz under Assets. In LocalWP, choose Add-ons → Installed → Install from disk, select the .tgz without extracting it, enable the add-on, and restart LocalWP if prompted. Open your site’s Tools → Pressable Connect. The source ZIP/TAR downloads are for developers and are not installable add-ons.
 
 Features
 - Transfer wp-content files, the database, or both.
-- Map each Local site to a Pressable site.
-- Store credentials and mappings in Local’s encrypted user-data storage.
+- Map each LocalWP site to a Pressable site.
+- Store credentials and mappings in LocalWP’s encrypted user-data storage.
 - Replace domains using WordPress-aware WP-CLI search-replace.
 - Show clearer SSH/SFTP login errors and clear stale passwords when changing destinations or users.
 - List Pressable sites alphabetically.
 
-Requirements: Local 10+, a Pressable API application with Sites Read and FTP Read scopes, and the selected site’s SSH/SFTP username and password.
+Requirements: LocalWP 10+, a Pressable API application with Sites Read and FTP Read scopes, and the selected site’s SSH/SFTP username and password.
 
 This early 0.1 release has been checked on macOS. Windows and Linux are unverified. Transfers can overwrite the selected destination data. Back up first and test with staging; databases are replaced rather than merged, and transfers do not use incremental MagicSync. WordPress core and wp-config.php are not transferred.
 
-Independent software by Kelp Agency; not affiliated with Pressable, WP Engine, or Local.
+Independent software by Kelp Agency; not affiliated with Pressable, WP Engine, or LocalWP.
